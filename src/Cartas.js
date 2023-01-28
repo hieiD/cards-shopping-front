@@ -5,7 +5,7 @@ import MainContext from './context';
 
 function Cartas() {
 	let [cartas, setCartas] = useState(null);
-	let { filtro } = useContext(MainContext);
+	let { filtro, setFiltro } = useContext(MainContext);
 
 	let url = 'http://localhost:8000/cartas';
 
@@ -17,8 +17,13 @@ function Cartas() {
 			});
 	}, []);
 
+	function buscar(event) {
+		setFiltro(event.target.value);
+	}
+
 	return (
 		<>
+			<input placeholder='Busca el producto...' onChange={buscar} />
 			<div className='cartas'>
 				{cartas !== null ? (
 					cartas

@@ -1,9 +1,11 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Caja from './Caja';
+import MainContext from './context';
 
 function Cajas() {
 	let [cajas, setCajas] = useState(null);
+	let { filtro, setFiltro } = useContext(MainContext);
 
 	let url = 'http://localhost:8000/cajas';
 
@@ -15,13 +17,20 @@ function Cajas() {
 			});
 	}, []);
 
+	function buscar(event) {
+		setFiltro(event.target.value);
+	}
+
 	return (
 		<>
+			<input placeholder='Busca el producto...' onChange={buscar} />
 			<div className='cajas'>
 				{cajas !== null ? (
-					cajas.map((caja) => {
-						return <Caja caja={caja} key={caja._id} />;
-					})
+					cajas
+						.filter((caja) => caja.Nombre.toLowerCase().includes(filtro.toLowerCase()))
+						.map((caja) => {
+							return <Caja caja={caja} key={caja._id} />;
+						})
 				) : (
 					<></>
 				)}

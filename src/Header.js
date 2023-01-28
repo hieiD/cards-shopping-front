@@ -1,13 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import './style.css';
-import MainContext from './context';
 
 function Header() {
-	let { filtro, setFiltro } = useContext(MainContext);
-	function buscar(event) {
-		setFiltro(event.target.value);
-	}
 	return (
 		<>
 			<h1 className='logo'>
@@ -24,14 +18,14 @@ function Header() {
 				<li>
 					<Link to='/Cartas'>Cartas</Link>
 				</li>
-
-				<li>
-					<input placeholder='Busca el producto...' onChange={buscar} />
-				</li>
-
 				<li className='carritoWrapper'>
 					<Link to='/Carrito'>
-						<img className='carrito' src='https://cdn-icons-png.flaticon.com/512/7090/7090661.png' />
+						<img className='carrito' alt='' src='https://cdn-icons-png.flaticon.com/512/7090/7090661.png' />
+					</Link>
+				</li>
+				<li className='usuarioWrapper'>
+					<Link to='/MiCuenta'>
+						<img className='usuarioImg' alt='' src='https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png' />
 					</Link>
 				</li>
 			</ul>

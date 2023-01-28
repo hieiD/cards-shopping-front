@@ -6,6 +6,7 @@ import Cartas from './Cartas';
 import Header from './Header';
 import Home from './Home';
 import Carrito from './Carrito';
+import MiCuenta from './MiCuenta';
 import { useState } from 'react';
 import MainContext from './context';
 
@@ -18,6 +19,7 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path='/' element={<Home />} />
+					<Route path='/MiCuenta' element={<MiCuenta />} />
 					<Route path='/Cajas' element={<Cajas />} />
 					<Route path='/Cartas' element={<Cartas />} />
 					<Route path='/Carrito' element={<Carrito />} />

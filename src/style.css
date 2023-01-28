@@ -142,3 +142,11 @@ p {
 	text-align: center;
 	text-shadow: 1px 2px 0 #fff, 1px 5px 3px #fff;
 }
+
+.usuarioImg {
+	max-width: 35px;
+}
+
+.sesion {
+	color: white;
+}
