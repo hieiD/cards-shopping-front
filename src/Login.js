@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Conectarse() {
@@ -8,35 +7,59 @@ function Conectarse() {
 	const [usuario, setUsuario] = useState('');
 	const [password, setPassword] = useState('');
 
-	async function submit(e) {
-		e.preventDefault();
+	// AXIOS
+	// async function submit(e) {
+	// 	e.preventDefault();
 
-		try {
-			await axios
-				.post('http://localhost:8000/usuario/Conectarse', {
-					usuario,
-					password,
-				})
-				.then((res) => {
-					if (res.data === 'no existe') {
-						history('/MiCuenta', { state: { id: usuario } });
-					} else if (res.data === 'logueado') {
-						history('/', { state: { id: usuario } });
-					}
-				})
-				.catch((e) => {
-					console.log(e);
-				});
-		} catch (e) {
-			console.log(e);
-		}
+	// 	try {
+	// 		await axios
+	// 			.post('http://localhost:8000/usuario/Conectarse', {
+	// 				usuario,
+	// 				password,
+	// 			})
+	// 			.then((res) => {
+	// 				if (res.data === 'no existe') {
+	// 					history('/MiCuenta', { state: { id: usuario } });
+	// 				} else if (res.data === 'logueado') {
+	// 					history('/', { state: { id: usuario } });
+	// 				}
+	// 			})
+	// 			.catch((e) => {
+	// 				console.log(e);
+	// 			});
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 	}
+	// }
+
+	function submit(event) {
+		event.preventDefault();
+		let data = {
+			usuario: usuario,
+			password: password,
+		};
+		fetch('http://localhost:8000/usuario/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((resp) => resp.json())
+			.then((res) => {
+				if (res.message === 'no existe') {
+					history('/MiCuenta', { state: { id: usuario } });
+				} else if (res.message === 'logueado') {
+					history('/', { state: { id: usuario } });
+				}
+			});
 	}
 
 	return (
 		<div className='signup'>
 			<h2 className='sesion'>Iniciar Sesión</h2>
 
-			<form action='POST'>
+			<div className='form-group'>
 				<input
 					type='usuario'
 					onChange={(e) => {
@@ -55,8 +78,10 @@ function Conectarse() {
 					name=''
 					id=''
 				/>
-				<input type='submit' onClick={submit} />
-			</form>
+				<button type='button' onClick={submit}>
+					Login
+				</button>
+			</div>
 
 			<br />
 

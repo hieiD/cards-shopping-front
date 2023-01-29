@@ -5,8 +5,10 @@ import Registro from './Registro';
 function MiCuenta() {
 	return (
 		<>
-			<Registro />
-			<Login />
+			<div className='account'>
+				<Registro />
+				<Login />
+			</div>
 		</>
 	);
 }
