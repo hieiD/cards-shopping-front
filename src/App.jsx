@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -13,13 +14,14 @@ import MainContext from './context';
 function App() {
 	let [carrito, setCarrito] = useState([]);
 	let [filtro, setFiltro] = useState('');
+	let [usuarioLogueado, setUsuarioLogueado] = useState(null);
 	return (
 		<MainContext.Provider value={{ carrito, setCarrito, filtro, setFiltro }}>
 			<BrowserRouter>
 				<Header />
 				<Routes>
 					<Route path='/' element={<Home />} />
-					<Route path='/MiCuenta' element={<MiCuenta />} />
+					<Route path='/MiCuenta' element={<MiCuenta usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />} />
 					<Route path='/Cajas' element={<Cajas />} />
 					<Route path='/Cartas' element={<Cartas />} />
 					<Route path='/Carrito' element={<Carrito />} />

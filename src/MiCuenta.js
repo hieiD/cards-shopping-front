@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from './Login';
 import Registro from './Registro';
 
-function MiCuenta() {
+function MiCuenta({ usuarioLogueado, setUsuarioLogueado }) {
 	return (
 		<>
 			<div className='account'>
-				<Registro />
-				<Login />
+				{usuarioLogueado != null && <p>Bienvenido, {usuarioLogueado} !</p>}
+				{usuarioLogueado == null && <Registro />}
+				{usuarioLogueado == null && <Login usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />}
 			</div>
 		</>
 	);

@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
+import fontawesome from '@fortawesome/fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/fontawesome-free-solid';
 import './style.css';
 
 function Header() {
+	fontawesome.library.add(faUser);
+
 	return (
 		<>
 			<h1 className='logo'>
@@ -25,7 +30,7 @@ function Header() {
 				</li>
 				<li className='usuarioWrapper'>
 					<Link to='/MiCuenta'>
-						<img className='usuarioImg' alt='' src='https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png' />
+						<FontAwesomeIcon icon='user' />
 					</Link>
 				</li>
 			</ul>

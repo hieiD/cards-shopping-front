@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 const Registro = () => {
-	const history = useNavigate();
-
+	// const history = useNavigate();
 	const [usuario, setUsuario] = useState('');
 	const [password, setPassword] = useState('');
+	const [showSuccess, setShowSuccess] = useState(false);
+	const [showError, setShowError] = useState(false);
 
 	// AXIOS
 	// async function submit(e) {
@@ -48,48 +50,60 @@ const Registro = () => {
 		})
 			.then((response) => response.json())
 			.then((res) => {
-				console.log(res);
 				if (res.message === 'existe') {
-					alert('El usuario ya existe');
+					setShowError(true);
+					setTimeout(() => {
+						setShowError(false);
+					}, 5000);
 				} else if (res.message === 'registrado') {
-					alert('El usuario ha sido registrado con éxito');
-					history('/MiCuenta', { state: { id: usuario } });
+					setShowSuccess(true);
+					setTimeout(() => {
+						setShowSuccess(false);
+					}, 5000);
 				}
 			});
 	}
 
 	return (
-		<div className='login'>
-			<h2 className='sesion'>Registrarse</h2>
+		<>
+			<Alert className='alert alert-success' show={showSuccess} variant={'success'}>
+				Usuario registrado correctamente.
+			</Alert>
+			<Alert className='alert alert-error' show={showError} variant={'danger'}>
+				Ya existe este usuario o ha ocurrido un error.
+			</Alert>
+			<div className='login'>
+				<h2 className='sesion'>Registrarse</h2>
 
-			<div className='form-group'>
-				<input
-					type='usuario'
-					onChange={(e) => {
-						setUsuario(e.target.value);
-					}}
-					placeholder='Usuario'
-					name=''
-					id=''
-				/>
-				<input
-					type='password'
-					onChange={(e) => {
-						setPassword(e.target.value);
-					}}
-					placeholder='Contraseña'
-					name=''
-					id=''
-				/>
-				<button type='button' onClick={submit}>
-					Registrarme
-				</button>
+				<div className='form-group'>
+					<input
+						type='usuario'
+						onChange={(e) => {
+							setUsuario(e.target.value);
+						}}
+						placeholder='Usuario'
+						name=''
+						id=''
+					/>
+					<input
+						type='password'
+						onChange={(e) => {
+							setPassword(e.target.value);
+						}}
+						placeholder='Contraseña'
+						name=''
+						id=''
+					/>
+					<button type='button' onClick={submit}>
+						Registrarme
+					</button>
+				</div>
+
+				<br />
+
+				<br />
 			</div>
-
-			<br />
-
-			<br />
-		</div>
+		</>
 	);
 };
 

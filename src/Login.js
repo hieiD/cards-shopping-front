@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Conectarse() {
+function Login({ usuarioLogueado, setUsuarioLogueado }) {
 	const history = useNavigate();
-
 	const [usuario, setUsuario] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -48,8 +47,9 @@ function Conectarse() {
 			.then((resp) => resp.json())
 			.then((res) => {
 				if (res.message === 'no existe') {
-					history('/MiCuenta', { state: { id: usuario } });
+					// TODO alerta de error con mensaje "Los datos son erróneos"
 				} else if (res.message === 'logueado') {
+					setUsuarioLogueado(usuario);
 					history('/', { state: { id: usuario } });
 				}
 			});
@@ -90,4 +90,4 @@ function Conectarse() {
 	);
 }
 
-export default Conectarse;
+export default Login;
