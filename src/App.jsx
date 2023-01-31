@@ -24,7 +24,7 @@ function App() {
 					<Route path='/MiCuenta' element={<MiCuenta usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />} />
 					<Route path='/Cajas' element={<Cajas />} />
 					<Route path='/Cartas' element={<Cartas />} />
-					<Route path='/Carrito' element={<Carrito />} />
+					<Route path='/Carrito' element={<Carrito usuarioLogueado={usuarioLogueado} />} />
 				</Routes>
 			</BrowserRouter>
 		</MainContext.Provider>

@@ -3,12 +3,12 @@ import Caja from './Caja';
 import Carta from './Carta';
 import MainContext from './context';
 
-function Carrito() {
+function Carrito({ usuarioLogueado }) {
 	let { carrito, setCarrito } = useContext(MainContext);
 	let [texto, setTexto] = useState('El carrito está vacío');
 	function comprar() {
 		carrito.forEach((product) => {
-			let data = { id: product._id };
+			let data = { id: product._id, usuarioId: usuarioLogueado };
 			fetch('http://localhost:8000/pedidos/comprar', {
 				method: 'POST',
 				headers: {
