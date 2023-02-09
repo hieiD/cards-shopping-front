@@ -5,7 +5,7 @@ import MainContext from './context';
 
 function Cartas() {
 	let [cartas, setCartas] = useState(null);
-	let { filtro, setFiltro } = useContext(MainContext);
+	let [filtro, setFiltro] = useState('');
 
 	let url = 'http://localhost:8000/cartas';
 

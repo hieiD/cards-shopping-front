@@ -15,10 +15,10 @@ import Footer from './Footer';
 
 function App() {
 	let [carrito, setCarrito] = useState([]);
-	let [filtro, setFiltro] = useState('');
+	// let [filtro, setFiltro] = useState('');
 	let [usuarioLogueado, setUsuarioLogueado] = useState(null);
 	return (
-		<MainContext.Provider value={{ carrito, setCarrito, filtro, setFiltro }}>
+		<MainContext.Provider value={{ carrito, setCarrito }}>
 			<BrowserRouter>
 				<Header />
 				<Routes>

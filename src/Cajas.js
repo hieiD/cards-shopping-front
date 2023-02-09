@@ -5,7 +5,7 @@ import MainContext from './context';
 
 function Cajas() {
 	let [cajas, setCajas] = useState(null);
-	let { filtro, setFiltro } = useContext(MainContext);
+	let [filtro, setFiltro] = useState('');
 
 	let url = 'http://localhost:8000/cajas';
 
