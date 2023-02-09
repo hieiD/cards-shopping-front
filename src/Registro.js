@@ -72,36 +72,33 @@ const Registro = () => {
 			<Alert className='alert alert-error' show={showError} variant={'danger'}>
 				Ya existe este usuario o ha ocurrido un error.
 			</Alert>
-			<div className='login'>
-				<h2 className='sesion'>Registrarse</h2>
-
-				<div className='form-group'>
-					<input
-						type='usuario'
-						onChange={(e) => {
-							setUsuario(e.target.value);
-						}}
-						placeholder='Usuario'
-						name=''
-						id=''
-					/>
-					<input
-						type='password'
-						onChange={(e) => {
-							setPassword(e.target.value);
-						}}
-						placeholder='Contraseña'
-						name=''
-						id=''
-					/>
-					<button type='button' onClick={submit}>
+			<div className='form-container sign-up-container'>
+				<form action='#'>
+					<h2>Registrarse</h2>
+					<label>
+						<input
+							className='usuario1'
+							type='text'
+							onChange={(e) => {
+								setUsuario(e.target.value);
+							}}
+							placeholder='Usuario'
+						/>
+					</label>
+					<label>
+						<input
+							className='usuario2'
+							type='password'
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
+							placeholder='Contraseña'
+						/>
+					</label>
+					<button className='account-button' type='button' onClick={submit}>
 						Registrarme
 					</button>
-				</div>
-
-				<br />
-
-				<br />
+				</form>
 			</div>
 		</>
 	);

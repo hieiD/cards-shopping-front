@@ -14,25 +14,32 @@ function Login({ usuarioLogueado, setUsuarioLogueado }) {
 			usuario: usuario,
 			password: password,
 		};
-		fetch('http://localhost:8000/usuario/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		})
-			.then((resp) => resp.json())
-			.then((res) => {
-				if (res.message === 'no existe') {
-					setShowError(true);
-					setTimeout(() => {
-						setShowError(false);
-					}, 5000);
-				} else if (res.message === 'logueado') {
-					setUsuarioLogueado(usuario);
-					history('/', { state: { id: usuario } });
-				}
-			});
+		if (!!usuario && !!password) {
+			fetch('http://localhost:8000/usuario/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			})
+				.then((resp) => resp.json())
+				.then((res) => {
+					if (res.message === 'no existe') {
+						setShowError(true);
+						setTimeout(() => {
+							setShowError(false);
+						}, 5000);
+					} else if (res.message === 'logueado') {
+						setUsuarioLogueado(usuario);
+						history('/', { state: { id: usuario } });
+					}
+				});
+		} else {
+			setShowError(true);
+			setTimeout(() => {
+				setShowError(false);
+			}, 5000);
+		}
 	}
 
 	return (
@@ -40,36 +47,33 @@ function Login({ usuarioLogueado, setUsuarioLogueado }) {
 			<Alert className='alert alert-error' show={showError} variant={'danger'}>
 				Los datos son erroneos.
 			</Alert>
-			<div className='signup'>
-				<h2 className='sesion'>Iniciar Sesión</h2>
-
-				<div className='form-group'>
-					<input
-						type='usuario'
-						onChange={(e) => {
-							setUsuario(e.target.value);
-						}}
-						placeholder='Usuario'
-						name=''
-						id=''
-					/>
-					<input
-						type='password'
-						onChange={(e) => {
-							setPassword(e.target.value);
-						}}
-						placeholder='Contraseña'
-						name=''
-						id=''
-					/>
-					<button type='button' onClick={submit}>
+			<div className='form-container sign-in-container'>
+				<form action='#'>
+					<h2>Iniciar Sesión</h2>
+					<label>
+						<input
+							className='usuario1'
+							type='text'
+							onChange={(e) => {
+								setUsuario(e.target.value);
+							}}
+							placeholder='Usuario'
+						/>
+					</label>
+					<label>
+						<input
+							className='usuario2'
+							type='password'
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
+							placeholder='Contraseña'
+						/>
+					</label>
+					<button className='account-button loginbuton' type='button' onClick={submit}>
 						Login
 					</button>
-				</div>
-
-				<br />
-
-				<br />
+				</form>
 			</div>
 		</>
 	);

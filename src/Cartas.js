@@ -23,7 +23,7 @@ function Cartas() {
 
 	return (
 		<>
-			<input placeholder='Busca el producto...' onChange={buscar} />
+			<input className='buscador' placeholder='Busca el producto...' onChange={buscar} />
 			<div className='cartas'>
 				{cartas !== null ? (
 					cartas

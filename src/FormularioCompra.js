@@ -50,49 +50,72 @@ function FormularioCompra({ usuarioLogueado }) {
 			<Alert className='alert alert-success' show={showSuccess} variant={'info'}>
 				La compra ha sido finalizada.
 			</Alert>
-			<div>
-				<input
-					type='text'
-					onChange={(e) => {
-						setNombre(e.target.value);
-						reinicio();
-					}}
-					placeholder='Nombre'
-				/>
-				<input
-					type='text'
-					onChange={(e) => {
-						setApellido(e.target.value);
-						reinicio();
-					}}
-					placeholder='Apellido'
-				/>
-				<input
-					type='text'
-					onChange={(e) => {
-						setDireccion(e.target.value);
-						reinicio();
-					}}
-					placeholder='Dirección'
-				/>
-				<input
-					type='text'
-					onChange={(e) => {
-						setCorreoElectronico(e.target.value);
-						reinicio();
-					}}
-					placeholder='Correo electronico'
-				/>
-				<input
-					type='number'
-					onInput={(e) => {
-						setTelefono(e.target.value);
-						reinicio();
-					}}
-					placeholder='Telefono'
-				/>
+
+			<div className='formularioPadre'>
+				<div className='formularioHijo'>
+					<p className='formularioP'>Rellena tus datos</p>
+					<div className='inputs'>
+						<input
+							className='input'
+							type='text'
+							onChange={(e) => {
+								setNombre(e.target.value);
+								reinicio();
+							}}
+							placeholder='Nombre'
+						/>
+					</div>
+					<div className='inputs'>
+						<input
+							className='input'
+							type='text'
+							onChange={(e) => {
+								setApellido(e.target.value);
+								reinicio();
+							}}
+							placeholder='Apellido'
+						/>
+					</div>
+					<div className='inputs'>
+						<input
+							className='input'
+							type='text'
+							onChange={(e) => {
+								setDireccion(e.target.value);
+								reinicio();
+							}}
+							placeholder='Dirección'
+						/>
+					</div>
+					<div className='inputs'>
+						<input
+							className='input'
+							type='text'
+							onChange={(e) => {
+								setCorreoElectronico(e.target.value);
+								reinicio();
+							}}
+							placeholder='Correo electronico'
+						/>
+					</div>
+					<div className='inputs'>
+						<input
+							className='input'
+							type='number'
+							onInput={(e) => {
+								setTelefono(e.target.value);
+								reinicio();
+							}}
+							placeholder='Telefono'
+						/>
+					</div>
+					{
+						<button className='finalizarCompra' onClick={enviarDatos}>
+							Finalizar Compra
+						</button>
+					}
+				</div>
 			</div>
-			{<button onClick={enviarDatos}>Finalizar Compra</button>}
 		</>
 	);
 }

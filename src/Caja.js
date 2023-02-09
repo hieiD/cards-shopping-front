@@ -32,7 +32,7 @@ function Caja(props) {
 			<div className='producto'>
 				<p className='product-title'>{caja.Nombre}</p>
 				<img className='caja' alt='' src={caja.Imagen} />
-				<p>{caja.Descripcion}</p>
+				<p className='descripcion'>{caja.Descripcion}</p>
 				<p className='price'>{caja.Precio}</p>
 				{esCarrito ? <button onClick={() => borrarProducto(caja._id)}>Borrar</button> : ''}
 				{esCarrito ? '' : <button onClick={añadirProducto}>Añadir al carrito</button>}

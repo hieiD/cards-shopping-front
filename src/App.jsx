@@ -11,6 +11,7 @@ import MiCuenta from './MiCuenta';
 import { useState } from 'react';
 import MainContext from './context';
 import FormularioCompra from './FormularioCompra';
+import Footer from './Footer';
 
 function App() {
 	let [carrito, setCarrito] = useState([]);
@@ -28,6 +29,7 @@ function App() {
 					<Route path='/Carrito' element={<Carrito usuarioLogueado={usuarioLogueado} />} />
 					<Route path='/FormularioCompra' element={<FormularioCompra usuarioLogueado={usuarioLogueado} />} />
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</MainContext.Provider>
 	);

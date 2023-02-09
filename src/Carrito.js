@@ -12,19 +12,36 @@ function Carrito({ usuarioLogueado }) {
 	}
 	return (
 		<>
-			<ul>
-				{carrito.map((producto) => (
-					<li>{producto.tipo === 'caja' ? <Caja caja={producto} esCarrito={true} /> : <Carta carta={producto} esCarrito={true} />}</li>
-				))}
-			</ul>
-			{carrito.length > 0 ? (
-				<Link to='/FormularioCompra'>
-					<button>Comprar</button>
-				</Link>
-			) : (
-				<p>{texto}</p>
-			)}
-			{carrito.length > 0 ? <button onClick={borrar}>Borrar</button> : ''}
+			<div className='carritoMaster'>
+				<div className='botonesCarrito'>
+					<div>
+						{carrito.length > 0 ? (
+							<Link to='/FormularioCompra'>
+								<button className='botonComprar'>Comprar</button>
+							</Link>
+						) : (
+							<p>{texto}</p>
+						)}
+					</div>
+					<div>
+						{carrito.length > 0 ? (
+							<button className='botonVaciar' onClick={borrar}>
+								Vaciar Carrito
+							</button>
+						) : (
+							''
+						)}
+					</div>
+				</div>
+
+				<div>
+					<ul className='productosCarrito'>
+						{carrito.map((producto) => (
+							<li>{producto.tipo === 'caja' ? <Caja caja={producto} esCarrito={true} /> : <Carta carta={producto} esCarrito={true} />}</li>
+						))}
+					</ul>
+				</div>
+			</div>
 		</>
 	);
 }
