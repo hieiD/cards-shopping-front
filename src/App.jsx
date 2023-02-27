@@ -15,7 +15,6 @@ import Footer from './Footer';
 
 function App() {
 	let [carrito, setCarrito] = useState([]);
-	// let [filtro, setFiltro] = useState('');
 	let [usuarioLogueado, setUsuarioLogueado] = useState(null);
 	return (
 		<MainContext.Provider value={{ carrito, setCarrito }}>

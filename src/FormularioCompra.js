@@ -13,32 +13,49 @@ function FormularioCompra({ usuarioLogueado }) {
 	let [telefono, setTelefono] = useState(null);
 	let [data, setData] = useState(null);
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [showError, setShowError] = useState(false);
 
 	function enviarDatos() {
 		let data1 = data;
 		carrito.forEach((product) => {
-			let data2 = { id: product._id, usuarioId: usuarioLogueado };
-			let dataToSend = Object.assign(data1, data2);
-			fetch('http://localhost:8000/pedidos/finalizarCompra', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(dataToSend),
-			});
+			if (!!nombre && !!apellido && !!direccion && !!correoElectronico && !!telefono) {
+				let data2 = { id: product._id, usuarioId: usuarioLogueado };
+				let dataToSend = Object.assign(data1, data2);
+				fetch('http://localhost:8000/pedidos/finalizarCompra', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(dataToSend),
+				})
+					.then((resp) => resp.json())
+					.then((res) => {
+						if (res.message === 'Compra finalizada') {
+							setCarrito([]);
+							setShowSuccess(true);
+							setTimeout(() => {
+								setShowSuccess(false);
+								history('/');
+							}, 5000);
+							setNombre('');
+							setApellido('');
+							setDireccion('');
+							setCorreoElectronico('');
+							setTelefono(null);
+						} else {
+							setShowError(true);
+							setTimeout(() => {
+								setShowError(false);
+							}, 5000);
+						}
+					});
+			} else {
+				setShowError(true);
+				setTimeout(() => {
+					setShowError(false);
+				}, 5000);
+			}
 		});
-
-		setCarrito([]);
-		setShowSuccess(true);
-		setTimeout(() => {
-			setShowSuccess(false);
-			history('/');
-		}, 5000);
-		setNombre('');
-		setApellido('');
-		setDireccion('');
-		setCorreoElectronico('');
-		setTelefono(null);
 	}
 
 	function reinicio() {
@@ -49,6 +66,9 @@ function FormularioCompra({ usuarioLogueado }) {
 		<>
 			<Alert className='alert alert-success' show={showSuccess} variant={'info'}>
 				La compra ha sido finalizada.
+			</Alert>
+			<Alert className='alert alert-error' show={showError} variant={'danger'}>
+				Los datos son erroneos.
 			</Alert>
 
 			<div className='formularioPadre'>

@@ -33,6 +33,11 @@ function Home() {
 						}, 5000);
 					}
 				});
+		} else {
+			setShowError(true);
+			setTimeout(() => {
+				setShowError(false);
+			}, 5000);
 		}
 	}
 

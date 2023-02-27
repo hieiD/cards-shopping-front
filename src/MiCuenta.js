@@ -30,7 +30,7 @@ function MiCuenta({ usuarioLogueado, setUsuarioLogueado }) {
 									<div className='overlay'>
 										<div className='overlay-panel overlay-left'>
 											<h2>Login</h2>
-											<p>Inicia seción aquí si ya tienes una cuenta</p>
+											<p>Inicia sesión aquí si ya tienes una cuenta</p>
 											<button className='account-button ghost mt-5' id='signIn' onClick={onClickSignIn}>
 												Iniciar sesión
 											</button>

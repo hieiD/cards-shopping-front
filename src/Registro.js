@@ -41,27 +41,34 @@ const Registro = () => {
 			usuario: usuario,
 			password: password,
 		};
-		fetch('http://localhost:8000/usuario/register', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		})
-			.then((response) => response.json())
-			.then((res) => {
-				if (res.message === 'existe') {
-					setShowError(true);
-					setTimeout(() => {
-						setShowError(false);
-					}, 5000);
-				} else if (res.message === 'registrado') {
-					setShowSuccess(true);
-					setTimeout(() => {
-						setShowSuccess(false);
-					}, 5000);
-				}
-			});
+		if (!!usuario && !!password) {
+			fetch('http://localhost:8000/usuario/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			})
+				.then((response) => response.json())
+				.then((res) => {
+					if (res.message === 'existe') {
+						setShowError(true);
+						setTimeout(() => {
+							setShowError(false);
+						}, 5000);
+					} else if (res.message === 'registrado') {
+						setShowSuccess(true);
+						setTimeout(() => {
+							setShowSuccess(false);
+						}, 5000);
+					}
+				});
+		} else {
+			setShowError(true);
+			setTimeout(() => {
+				setShowError(false);
+			}, 5000);
+		}
 	}
 
 	return (
